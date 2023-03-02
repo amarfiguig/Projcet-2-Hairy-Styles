@@ -1,0 +1,28 @@
+{{> post-partial post=post}}
+
+<h2>Comments</h2>
+<div class="comments">
+  {{#each post.comments}}
+  <div class="each-comment">
+    <p>{{user_comment}}</p>
+    <p id="postby">{{user.name}} - {{format_date createdAt}}</p>
+  </div>
+  {{/each}}
+</div>
+
+{{#if logged_in}}
+
+  <form class="form new-project-form">
+    <label for="project-desc">comment:</label>
+    <textarea class="form-input" id="comment-desc" name="comment-desc" style="width: 50%; height: 100px"></textarea>
+    <button type="submit" class="btn btn-primary">Comment Now</button>
+  <form>
+    <script type="text/javascript" src="/js/comment-handler.js"></script>
+    {{else}}
+    <h2>You must be <a class="link" href="/login">logged in</a> to comment</h2>
+
+    {{/if}}
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&callback=initMap&libraries=places"></script>
+<script src="/js/single-post.js"></script>
+

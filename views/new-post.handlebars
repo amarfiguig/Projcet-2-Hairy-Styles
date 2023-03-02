@@ -1,0 +1,57 @@
+<h2>Get Involved</h2>
+<div class="new-post">
+    <form action="/api/posts/newreview" method="POST" enctype="multipart/form-data">
+        <input type="file" id="image-input" name="image" />
+        <label for="hairstyle-select">Select Hairstyle:</label>
+        <select id="hairstyle-select" name="hairstyle">
+            {{#each hairstyle}}
+            <option value="{{id}}">{{hairstyle_name}}</option>
+            {{/each}}
+            <option value="other">Other</option>
+        </select>
+
+        <div id="hairstyle-other" style="display: none;">
+            <label for="hairstyle-name">Hairstyle Name:</label>
+            <input type="text" id="hairstyle-name" name="hairstyleName">
+        </div>
+
+        <br>
+        <label for="hairdresser-select">Select Hairdresser:</label>
+        <select id="hairdresser-select" name="hairdresser">
+            {{#each hairdresser}}
+            <option value="{{id}}">{{hairdresser_name}}</option>
+            {{/each}}
+            <option value="other">Other</option>
+        </select>
+
+        <div id="hairdresser-other" style="display: none;">
+            <label for="hairdresser-name">Hairdresser Name:</label>
+            <input type="text" id="hairdresser-name" name="hairdresserName">
+
+            <label for="hairdresser-location">Hairdresser Location:</label>
+            <input type="text" id="hairdresser-location" name="hairdresserLocation">
+        </div>
+        <br>
+        <textarea placeholder="ADD YOUR COMMENTS..." class="text-content" name="textInput" rows="20"></textarea>
+        <button class="btn">Add Post</button>
+    </form>
+</div>
+
+<script>
+    //Listens for hairdresser and shows input form when input is "other"
+    document.getElementById("hairdresser-select").addEventListener("change", function () {
+        if (this.value === "other") {
+            document.getElementById("hairdresser-other").style.display = "block";
+        } else {
+            document.getElementById("hairdresser-other").style.display = "none";
+        }
+    });
+    //Listens for hairstyle and shows input form when input is "other"
+    document.getElementById("hairstyle-select").addEventListener("change", function () {
+        if (this.value === "other") {
+            document.getElementById("hairstyle-other").style.display = "block";
+        } else {
+            document.getElementById("hairstyle-other").style.display = "none";
+        }
+    });
+</script>

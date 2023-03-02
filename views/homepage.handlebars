@@ -1,0 +1,36 @@
+<h1>Your Hair, Your Way</h1>
+<div id="map"></div>
+<h2>Take part in the conversation.</h2>
+<div class="homepage-posts">
+    {{#each posts as |post|}}
+    <div class="each-hp-post">
+        <div class="card-image">
+            <img src="/temp/{{image_name}}" alt="image uploaded by user" class="card-image" />
+        </div>
+        <div class="post-link" data-id="/post/{{id}}">
+                <div id="style">{{hairstyle.hairstyle_name}} @</div>
+                <div id="salon">{{hairdresser.hairdresser_name}}</div>
+                <div>Location: {{hairdresser.location}}</div>
+                <p>{{body}}</p>
+                <div id="postby">{{user.name}} - {{format_date createdAt}}</div>
+        </div>
+        <div class="card-action">
+            <button data-name="{{hairdresser.hairdresser_name}}" data-location="{{hairdresser.location}}" class="map-button">View on Map</button>
+        </div>
+    </div>
+
+    {{/each}}
+</div>
+<script>
+    //get all the post elements
+    var postElements = document.querySelectorAll(".post-link");
+    postElements.forEach(function (element) {
+        element.addEventListener("click", function () {
+
+            //get the post id from data-id attribute
+            var postId = this.dataset.id;
+            //Redirects to the post page
+            window.location.href = postId;
+        });
+    });
+</script>

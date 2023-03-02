@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/hairystyles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <title>Hairy Styles</title>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <img class="logo" src="/images/logo-3.png" alt="logo of map marker and pair of scissors">
+      <nav>
+        
+        <ul>
+          <li>
+           <label for="search"></label>
+          {{!-- Select search menu containing all database hairstyles --}}
+            <select id="search" name="hairstyle">
+              {{#each hairstyles}}
+              <option value="{{id}}">{{hairstyle_name}}</option>
+              {{/each}}
+           </select>
+           <button id="searchButton">Search</button>
+          </li>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/newPost">Submit Your Cut</a>
+          </li>
+          <li>
+            <a href="/contacts">Contacts</a>
+          </li>
+          {{#if logged_in}}
+          <li>
+            <a href="/profile">Profile</a>
+          </li>
+          <li id="logout">
+            <a href="/">Log Out</a>
+          </li>
+          {{else}}
+          <li>
+            <a href="/login">Log In</a>
+          </li>
+          {{/if}}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {{{ body }}}
+  </main>
+
+
+  <footer>
+  </footer>
+
+  {{#if logged_in}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+
+</body>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&callback=initMap&libraries=places"></script>
+<script src="/js/hairystyles.js"></script>
+<script>
+  //Listens for hairstyle from search and relates to hairstyle ID in database
+    document.getElementById("searchButton").addEventListener("click", function () {
+      const hairstyleId = document.getElementById("search").value;
+      window.location.href = `/search/${hairstyleId}`;
+    });
+</script>
+</html>
